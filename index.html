@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Login</title>
+</head>
+<body onselectstart='return false'>
+    <center>
+        <div id='fill'>
+            <h1 style="cursor: default;">Signup</h1>
+            <input placeholder="Enter Username" id='username' type="username">
+            <input placeholder="Enter Password" id='pass' type="password">
+            <input placeholder="Re-Type Password" id='re-pass' type="password">
+            <button id='done' onclick='check()'>Signup!</button>
+        </div>
+    </center>
+</body>
+<style>
+    #fill{
+        border: 2px solid #39FF14;
+        border-radius: 50px;
+        width: 30%;
+        height: 90vh;
+    }
+    input{
+        font-family: 'Courier New', Courier, monospace;
+        border: 2px solid #39FF14;
+        border-radius: 50px;
+        width: 90%;
+        font-size: 25px;
+        outline: none;
+        margin-top: 30px;
+        transition: all 0.50s linear;
+    }
+    h1{
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 50px;
+    }
+    #username{
+        margin-top: 100px;
+    }
+    #done{
+        margin-top: 150px;
+        font-size: 25px;
+        width: 99%;
+        border: 2px solid #39FF14;
+        border-radius: 50px;
+        font-family: 'Courier New', Courier, monospace;
+        background-color: rgb(99, 163, 99);
+        transition: all .50s linear;
+    }
+    #done:hover{
+        background-color: lightgreen;
+        border-color: darkgreen;
+    }
+    input:hover{
+        border-color: darkgreen;
+        border-radius: 15px;
+    }
+    .swal-text{
+        font-family: 'Courier New', Courier, monospace;
+    }
+    .swal-title{
+        font-family: 'Courier New', Courier, monospace;
+    }
+</style>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+
+function success(){
+    swal("Success", "Thank You "+document.getElementById('username').value+" For Signing Up With Future Login!", "success");
+}
+
+// Dark Mode...
+let matched = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+if (matched){
+	document.querySelector('body').style.backgroundColor = '#242424';
+    document.querySelector('h1').style.color='white';
+    document.getElementById('fill').style.backgroundColor='rgb(43, 60, 66)';
+}
+else{
+    document.querySelector('body').style.backgroundColor = 'lightblue';
+    document.querySelector('h1').style.color='black';
+    document.getElementById('fill').style.backgroundColor='#4aa9e0';
+}
+
+function doNotMatch(){
+    swal('Passwords Error', 'Passwords Do Not Match!', 'error')
+}
+
+function check(){
+    var txt=document.getElementById('username').value.replace(/^\s+/, '').replace(/\s+$/, '');
+    var password=document.getElementById('pass').value.replace(/^\s+/, '').replace(/\s+$/, '');
+    var repass=document.getElementById('re-pass').value.replace(/^\s+/, '').replace(/\s+$/, '');
+    user = txt.replace(/^\s+/, '').replace(/\s+$/, '');
+    if (document.getElementById('pass').value=='') {
+        swal("Blank Spaces Found!", "You Have Left Blank Spaces!", 'error')
+    }
+    else if (user === '') {
+        swal("Blank Spaces Found!", "You Have Left Blank Spaces!", 'error')
+    }
+    else if (password === '') {
+        swal("Blank Spaces Found!", "You Have Left Blank Spaces!", 'error')
+    }
+    else if (repass === '') {
+        swal("Blank Spaces Found!", "You Have Left Blank Spaces!", 'error')
+    }
+    else if (document.getElementById('pass').value!=document.getElementById('re-pass').value){
+            doNotMatch()
+    }
+    else{
+        success()
+    }
+}
+
+document.addEventListener('contextmenu', function (prevent){
+    prevent.preventDefault()
+})
+
+document.addEventListener('keydown', function (key){
+    if (key.which==13){
+        check()
+    }
+})
+
+</script>
+</html>
